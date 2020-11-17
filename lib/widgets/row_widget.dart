@@ -40,7 +40,7 @@ class GridCollageWidget extends StatelessWidget {
 
   buildRow(int index) {
     final ValueNotifier<Matrix4> matrix = ValueNotifier(Matrix4.identity());
-    print(matrix.value);
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Stack(
@@ -91,14 +91,6 @@ class GridCollageWidget extends StatelessWidget {
                     ),
             ),
           ),
-          // Positioned.fill(
-          //     child: new Material(
-          //         borderRadius: BorderRadius.all(Radius.circular(5)),
-          //         color: Colors.transparent,
-          //         child: new InkWell(
-          //           highlightColor: Colors.transparent,
-          //           onTap: () => showDialogImage(index),
-          //         ))),
         ],
       ),
     );
