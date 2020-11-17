@@ -41,58 +41,55 @@ class GridCollageWidget extends StatelessWidget {
   buildRow(int index) {
     final ValueNotifier<Matrix4> matrix = ValueNotifier(Matrix4.identity());
 
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Stack(
-        fit: StackFit.expand,
+    return Stack(
+      fit: StackFit.expand,
 //      splashColor: Colors.blue[100],
 //      highlightColor: Colors.blue[200],
 //      onTap: () => showDialogImage(index),
-        children: <Widget>[
-          Positioned.fill(
-            bottom: 0.0,
-            child: Container(
-              child: imageList[index].imageUrl != null
-                  ? Container(
-                      width: 100.0,
-                      height: 300.0,
-                      color: Colors.black,
-                      child: MatrixGestureDetector(
-                        onMatrixUpdate: (m, tm, sm, rm) {
-                          matrix.value = m;
-                        },
-                        child: AnimatedBuilder(
-                          animation: matrix,
-                          builder: (context, child) {
-                            return Transform(
-                              transform: matrix.value,
-                              child: GestureDetector(
-                                onTap: () => showDialogImage(index),
-                                child: Image.file(
-                                  imageList[index].imageUrl,
-                                  fit: BoxFit.cover,
-                                ),
+      children: <Widget>[
+        Positioned.fill(
+          bottom: 0.0,
+          child: Container(
+            child: imageList[index].imageUrl != null
+                ? Container(
+                    width: 100.0,
+                    height: 300.0,
+                    color: Colors.black,
+                    child: MatrixGestureDetector(
+                      onMatrixUpdate: (m, tm, sm, rm) {
+                        matrix.value = m;
+                      },
+                      child: AnimatedBuilder(
+                        animation: matrix,
+                        builder: (context, child) {
+                          return Transform(
+                            transform: matrix.value,
+                            child: GestureDetector(
+                              onTap: () => showDialogImage(index),
+                              child: Image.file(
+                                imageList[index].imageUrl,
+                                fit: BoxFit.cover,
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () => showDialogImage(index),
-                      child: const Padding(
-                        padding: EdgeInsets.all(3),
-                        child: Material(
-                          child: Icon(Icons.add),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          color: Color(0xFFD3D3D3),
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-            ),
+                  )
+                : GestureDetector(
+                    onTap: () => showDialogImage(index),
+                    child: const Padding(
+                      padding: EdgeInsets.all(3),
+                      child: Material(
+                        child: Icon(Icons.add),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: Color(0xFFD3D3D3),
+                      ),
+                    ),
+                  ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
