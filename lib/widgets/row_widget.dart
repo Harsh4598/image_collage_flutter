@@ -68,7 +68,6 @@ class GridCollageWidget extends StatelessWidget {
                               onTap: () => showDialogImage(index),
                               child: Image.file(
                                 imageList[index].imageUrl,
-                                fit: BoxFit.cover,
                               ),
                             ),
                           );
