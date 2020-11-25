@@ -24,6 +24,7 @@ class GridCollageWidget extends StatelessWidget {
       return Container(
         color: Color(0xFF05396B),
         child: StaggeredGridView.countBuilder(
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: false,
             itemCount: imageList.length,
             crossAxisCount: getCrossAxisCount(collageType),
