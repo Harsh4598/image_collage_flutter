@@ -126,35 +126,53 @@ class GridCollageWidget extends StatelessWidget {
   }
 
   showDialogImage(int index) {
+    final size = MediaQuery.of(context).size;
     showModalBottomSheet(
+        backgroundColor: Color(0xFFC6E1FB).withOpacity(0.9),
         context: context,
         builder: (BuildContext context) {
-          return Container(
-            color: Color(0xFF737373),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(10.0),
-                      topRight: const Radius.circular(10.0))),
-              child: Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    buildDialogOption(index, isForStorage: false),
-                    buildDialogOption(index),
-                    (imageListBloc.currentState as ImageListState)
-                                .images[index]
-                                .imageUrl !=
-                            null
-                        ? buildDialogOption(index, isForRemovePhoto: true)
-                        : Container(),
-                  ],
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: new Text(
+                  "Choose Option",
+                  style: TextStyle(
+                      color: Color(0xFF05396B),
+                      fontWeight: FontWeight.w800,
+                      fontSize: size.height * 0.03),
                 ),
               ),
-            ),
+              Container(
+                height: 1,
+                color: Color(0xFF05396B),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    // color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                        topLeft: const Radius.circular(60.0),
+                        topRight: const Radius.circular(60.0))),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      buildDialogOption(index, isForStorage: false),
+                      buildDialogOption(index),
+                      (imageListBloc.currentState as ImageListState)
+                                  .images[index]
+                                  .imageUrl !=
+                              null
+                          ? buildDialogOption(index, isForRemovePhoto: true)
+                          : Container(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           );
         });
   }
@@ -189,19 +207,22 @@ class GridCollageWidget extends StatelessWidget {
                       ? Icons.clear
                       : isForStorage
                           ? Icons.photo_album
-                          : Icons.add_a_photo,
+                          : Icons.camera,
                   color: isForRemovePhoto
-                      ? Colors.red
+                      ? Color(0xFF05396B)
                       : isForStorage
-                          ? Colors.amber
-                          : Colors.blue,
+                          ? Color(0xFF05396B)
+                          : Color(0xFF05396B),
                 ),
               ),
-              Text(isForRemovePhoto
-                  ? "Remove"
-                  : isForStorage
-                      ? "Gallery"
-                      : "Camera")
+              Text(
+                isForRemovePhoto
+                    ? "Remove"
+                    : isForStorage
+                        ? "Gallery"
+                        : "Camera",
+                style: TextStyle(color: Color(0xFF05396B)),
+              )
             ],
           ),
         ));
